@@ -7,13 +7,13 @@
   
   <link rel="icon" href="./static/images/logo.png">
   
-  <!-- 外部字体和图标库 -->
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   
-  <!-- 自定义美化样式 -->
+ 
   <style>
     :root {
       --primary-color: #3B82F6; /* A nice, modern blue */
@@ -35,7 +35,7 @@
       background-color: var(--white-color);
     }
     
-    /* 导航栏样式 */
+    /* nacbar */
     .navbar {
       background-color: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(10px);
@@ -43,7 +43,7 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
     
-    /* 英雄区域样式 */
+    /* hero */
     .hero-gradient {
       background: linear-gradient(135deg, #F9FAFB 0%, #EFF6FF 100%);
     }
@@ -60,7 +60,7 @@
       line-height: 1.6;
     }
     
-    /* 按钮样式 */
+    /* button */
     .button.is-primary, .button.is-secondary {
       border-radius: 9999px;
       font-weight: 600;
@@ -91,7 +91,7 @@
       transform: translateY(-3px);
     }
     
-    /* 通用样式 */
+    /* common */
     .section {
       padding: 6rem 1.5rem;
     }
@@ -128,7 +128,7 @@
       font-size: 1.75rem;
     }
     
-    /* 排行榜表格样式 */
+
     .leaderboard-table {
       border-collapse: separate;
       border-spacing: 0;
@@ -175,7 +175,7 @@
   </style>
 </head>
 <body>
-  <!-- 导航栏 -->
+
   <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container is-max-desktop">
       <div class="navbar-brand">
@@ -209,7 +209,7 @@
     </div>
   </nav>
 
-  <!-- 英雄区域 -->
+
   <section class="hero hero-gradient is-fullheight-with-navbar">
     <div class="hero-body">
       <div class="container is-max-desktop has-text-centered">
@@ -239,7 +239,7 @@
     </div>
   </section>
 
-  <!-- 介绍部分 -->
+  <!-- introduction -->
   <section id="introduction" class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -258,7 +258,7 @@
     </div>
   </section>
 
-  <!-- 特性部分 -->
+  <!-- data core feature -->
   <section id="features" class="section" style="background-color: var(--light-gray-color);">
     <div class="container is-max-desktop">
         <h2 class="title is-2 mb-8 has-text-centered">Core Features</h2>
@@ -283,7 +283,7 @@
   </section>
 
 
-  <!-- 排行榜部分 -->
+  <!-- leaderboard -->
   <section id="leaderboard" class="section">
     <div class="container is-max-widescreen">
       <h2 class="title is-2 mb-8 has-text-centered">Leaderboard</h2>
@@ -297,7 +297,7 @@
                   <th style="min-width: 190px; width: 1%; white-space: nowrap;">Model</th>
 
                   <th style="text-align: center;">Params</th>
-                  <th style="text-align: center;">Frames</th>
+                  <!-- <th style="text-align: center;">Frames</th> -->
                   <th style="text-align: center;">Date</th>
                   <th style="text-align: center;">Overall</th>
                   <th style="text-align: center;">(0,1] min</th>
@@ -323,7 +323,7 @@
     </div>
   </section>
 
-  <!-- 数据统计与示例 -->
+  <!-- data statistic  -->
   <section id="statistics" class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -362,7 +362,7 @@
     </div>
   </section>
 
-  <!-- 性能分析部分 -->
+  <!-- performance analysis -->
   <section id="analysis" class="section">
     <div class="container is-max-desktop">
       <h2 class="title is-2 mb-8 has-text-centered">Performance Analysis</h2>
@@ -389,7 +389,7 @@
     </div>
   </section>
   
-  <!-- 引用部分 -->
+  <!-- citaiton -->
   <section id="citation" class="section" style="background-color: var(--light-gray-color);">
     <div class="container is-max-desktop">
         <h2 class="title is-2 mb-6 has-text-centered">Citation</h2>
@@ -398,15 +398,15 @@
                 <div class="card">
                     <div class="card-content">
                         <pre style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; border: 1px solid var(--border-color);">
-@misc{li2025omnivideobenchaudiovisualunderstandingevaluation,
-      title={OmniVideoBench: Towards Audio-Visual Understanding Evaluation for Omni MLLMs}, 
-      author={Caorui Li and Yu Chen and Yiyan Ji and Jin Xu and Zhenyu Cui and Shihao Li and Yuanxing Zhang and Jiafu Tang and Zhenghao Song and Dingling Zhang and Ying He and Haoxiang Liu and Yuxuan Wang and Qiufeng Wang and Zhenhe Wu and Jiehui Luo and Zhiyu Pan and Weihao Xie and Chenchen Zhang and Zhaohui Wang and Jiayi Tian and Yanghai Wang and Zhe Cao and Minxin Dai and Ke Wang and Runzhe Wen and Yinghao Ma and Yaning Pan and Sungkyun Chang and Termeh Taheri and Haiwen Xia and Christos Plachouras and Emmanouil Benetos and Yizhi Li and Ge Zhang and Jian Yang and Tianhao Peng and Zili Wang and Minghao Liu and Junran Peng and Zhaoxiang Zhang and Jiaheng Liu},
-      year={2025},
-      eprint={2510.10689},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2510.10689}, 
-}</pre>
+                        @misc{li2025omnivideobenchaudiovisualunderstandingevaluation,
+                              title={OmniVideoBench: Towards Audio-Visual Understanding Evaluation for Omni MLLMs}, 
+                              author={Caorui Li and Yu Chen and Yiyan Ji and Jin Xu and Zhenyu Cui and Shihao Li and Yuanxing Zhang and Jiafu Tang and Zhenghao Song and Dingling Zhang and Ying He and Haoxiang Liu and Yuxuan Wang and Qiufeng Wang and Zhenhe Wu and Jiehui Luo and Zhiyu Pan and Weihao Xie and Chenchen Zhang and Zhaohui Wang and Jiayi Tian and Yanghai Wang and Zhe Cao and Minxin Dai and Ke Wang and Runzhe Wen and Yinghao Ma and Yaning Pan and Sungkyun Chang and Termeh Taheri and Haiwen Xia and Christos Plachouras and Emmanouil Benetos and Yizhi Li and Ge Zhang and Jian Yang and Tianhao Peng and Zili Wang and Minghao Liu and Junran Peng and Zhaoxiang Zhang and Jiaheng Liu},
+                              year={2025},
+                              eprint={2510.10689},
+                              archivePrefix={arXiv},
+                              primaryClass={cs.AI},
+                              url={https://arxiv.org/abs/2510.10689}, 
+                        }</pre>
                     </div>
                 </div>
             </div>
@@ -414,7 +414,7 @@
     </div>
   </section>
 
-  <!-- 页脚 -->
+  <!-- footnote -->
   <footer class="footer" style="background-color: var(--dark-color); color: white; padding: 4rem 1.5rem;">
       <div class="container has-text-centered">
 
@@ -431,10 +431,8 @@
       </div>
   </footer>
 
-  <!-- 加载JSON和处理交互的JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 导航栏汉堡菜单
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
       if ($navbarBurgers.length > 0) {
         $navbarBurgers.forEach(el => {
@@ -447,11 +445,11 @@
         });
       }
       
-      // 加载排行榜数据
+      // load data
       loadLeaderboardData();
     });
 
-// --- 排行榜数据加载逻辑 ---
+/// --- load data for leaderboard ---
 const jsonFilePath = './static/data/leaderboard.json';
 const leaderboardBody = document.getElementById('leaderboard-body');
 
@@ -469,10 +467,18 @@ async function loadLeaderboardData() {
 
 function renderLeaderboard(models) {
   leaderboardBody.innerHTML = '';
+
+  // rank according to overall score
+  models.sort((a, b) => parseFloat(b.overall) - parseFloat(a.overall));
+
+  // reorder 
+  models.forEach((model, index) => {
+    model.rank = index + 1;
+  });
+
   models.forEach(model => {
     const row = document.createElement('tr');
 
-    // 构造模型名称部分：名称 + 图标
     const iconStyle = 'width:20px; height:20px; vertical-align:middle; margin-left:4px; margin-right:-2px';
     let nameContent = `
       <a href="${model.link}" target="_blank" class="has-text-primary has-text-weight-semibold">${model.name}</a>
@@ -494,7 +500,6 @@ function renderLeaderboard(models) {
         </p>
       </td>
       <td class="has-text-centered">${model.params}</td>
-      <td class="has-text-centered">${model.frames}</td>
       <td class="has-text-centered">${model.date}</td>
       <td class="has-text-centered has-text-weight-bold has-text-primary-dark">${model.overall}</td>
       <td class="has-text-centered">${model.short}</td>
