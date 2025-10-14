@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.9">
+  <title>OmniVideoBench: Towards Audio-Visual Understanding Evaluation</title>
+  
+  <link rel="icon" href="./static/images/logo.png">
+  
+  <!-- 外部字体和图标库 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <!-- 自定义美化样式 -->
+  <style>
+    :root {
+      --primary-color: #3B82F6; /* A nice, modern blue */
+      --primary-color-dark: #2563EB;
+      --secondary-color: #10B981; /* A vibrant green for accents */
+      --dark-color: #1F2937; /* Dark gray for text */
+      --light-gray-color: #F3F4F6; /* Light gray for backgrounds */
+      --white-color: #FFFFFF;
+      --border-color: #E5E7EB;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #374151;
+      background-color: var(--white-color);
+    }
+    
+    /* 导航栏样式 */
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* 英雄区域样式 */
+    .hero-gradient {
+      background: linear-gradient(135deg, #F9FAFB 0%, #EFF6FF 100%);
+    }
+    
+    .hero .title.is-1 {
+      color: var(--dark-color);
+      font-weight: 800;
+      font-size: 3.5rem;
+    }
+    
+    .hero .subtitle.is-3 {
+      color: #4B5563;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+    
+    /* 按钮样式 */
+    .button.is-primary, .button.is-secondary {
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .button.is-primary {
+      background-color: var(--primary-color);
+      border-color: transparent;
+    }
+
+    .button.is-primary:hover {
+      background-color: var(--primary-color-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(59, 130, 246, 0.25);
+    }
+
+    .button.is-secondary {
+      background-color: var(--white-color);
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+    }
+
+    .button.is-secondary:hover {
+      background-color: #EFF6FF;
+      transform: translateY(-3px);
+    }
+    
+    /* 通用样式 */
+    .section {
+      padding: 6rem 1.5rem;
+    }
+    
+    .title.is-2 {
+      color: var(--dark-color);
+      font-weight: 900;
+    }
+
+    .card {
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+    
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* 特性图标 */
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem auto;
+      background-color: #EFF6FF;
+      color: var(--primary-color);
+      font-size: 1.75rem;
+    }
+    
+    /* 排行榜表格样式 */
+    .leaderboard-table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+    }
+    
+    .leaderboard-table thead th {
+      background-color: var(--light-gray-color);
+      color: var(--dark-color);
+      font-weight: 1300;
+      border: none;
+    }
+
+    .leaderboard-table tbody tr:not(:last-child) {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .leaderboard-table td {
+      vertical-align: middle;
+      border: none;
+    }
+    
+    .new-badge {
+      background-color: var(--secondary-color);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 1000;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-left: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .section {
+        padding: 4rem 1.5rem;
+      }
+      .hero .title.is-1 {
+        font-size: 2.5rem;
+      }
+      .hero .subtitle.is-3 {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <img src="./static/images/logo.png" alt="OmniVideoBench Logo" style="max-height: 2.5rem;">
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="#introduction">Introduction</a>
+          <a class="navbar-item" href="#features">Features</a>
+          <a class="navbar-item" href="#leaderboard">Leaderboard</a>
+          <a class="navbar-item" href="#statistics">Statistics</a>
+          <a class="navbar-item" href="#citation">Citation</a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a href="https://github.com/NJU-LINK/OmniVideoBench" class="button is-secondary">
+              <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
+                alt="Hugging Face" 
+                style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px;"></i> Data
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <section class="hero hero-gradient is-fullheight-with-navbar">
+    <div class="hero-body">
+      <div class="container is-max-desktop has-text-centered">
+        <div class="columns is-centered">
+          <div class="column is-10">
+            <h1 class="title is-1 mb-5">
+              OmniVideoBench
+            </h1>
+            <h2 class="subtitle is-3 mb-6">
+              A Large-Scale and Rigorously Designed Benchmark for Synergistic Audio-Visual Understanding
+            </h2>
+            <div class="buttons is-centered">
+              <a href="https://github.com/NJU-LINK/OmniVideoBench" class="button is-primary is-large mr-4">
+                <i class="fab fa-github mr-2"></i> GitHub
+              </a>
+              <a href="https://arxiv.org/pdf/24xx.xxxxxx" class="button is-primary is-large mr-4">
+                <i class="ai ai-arxiv mr-2"></i> Paper
+              </a>
+              <a href="#leaderboard" class="button is-secondary is-large">
+                <i class="fas fa-trophy mr-2"></i> Leaderboard
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 介绍部分 -->
+  <section id="introduction" class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <h2 class="title is-2 mb-6 has-text-centered">What is OmniVideoBench?</h2>
+          <div class="content is-size-5" style="line-height: 1.7;">
+            <p>
+              Recent advances in multimodal large language models (MLLMs) have shown immense potential in video understanding. However, existing benchmarks often fall short in evaluating true synergistic reasoning across both <strong>audio and visual</strong> modalities. They might neglect one modality or fail to integrate them in a logically consistent way.
+            </p>
+            <p>
+              To address this, we introduce <strong>OmniVideoBench</strong>, a large-scale, rigorously designed benchmark created to assess synergistic audio-visual understanding. It places a strong emphasis on modality complementarity and logical consistency. The benchmark includes <strong>1,000 high-quality question-answer (QA) pairs</strong> from <strong>628 diverse videos</strong> (from seconds to 30 minutes long), each annotated with step-by-step reasoning. Our evaluation of various MLLMs reveals a significant gap between current model performance and human-level reasoning, highlighting the challenges of genuine audio-visual intelligence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 特性部分 -->
+  <section id="features" class="section" style="background-color: var(--light-gray-color);">
+    <div class="container is-max-desktop">
+        <h2 class="title is-2 mb-8 has-text-centered">Core Features</h2>
+        <div class="columns is-multiline">
+            <div class="column is-4 has-text-centered">
+                <div class="feature-icon"><i class="fas fa-film"></i></div>
+                <h3 class="title is-4">Diverse Videos</h3>
+                <p>Features 628 videos up to 30 minutes, covering 8 major categories and 68 subcategories.</p>
+            </div>
+            <div class="column is-4 has-text-centered">
+                <div class="feature-icon"><i class="fas fa-sitemap"></i></div>
+                <h3 class="title is-4">Step-by-Step Reasoning</h3>
+                <p>Each of the 1000 QA pairs is annotated with detailed, atomic reasoning chains for transparency.</p>
+            </div>
+            <div class="column is-4 has-text-centered">
+                <div class="feature-icon"><i class="fas fa-puzzle-piece"></i></div>
+                <h3 class="title is-4">Synergistic Evaluation</h3>
+                <p>Designed to test the complementary relationship between audio and visual cues, not just one.</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+
+  <!-- 排行榜部分 -->
+  <section id="leaderboard" class="section">
+    <div class="container is-max-widescreen">
+      <h2 class="title is-2 mb-8 has-text-centered">Leaderboard</h2>
+      <div class="card">
+        <div class="card-content" style="padding: 0;">
+          <div class="table-container">
+            <table class="leaderboard-table table is-fullwidth">
+              <thead>
+                <tr>
+                  <th style="width: 5%; text-align: center;">#</th>
+                  <th style="min-width: 190px; width: 1%; white-space: nowrap;">Model</th>
+
+                  <th style="text-align: center;">Params</th>
+                  <th style="text-align: center;">Frames</th>
+                  <th style="text-align: center;">Date</th>
+                  <th style="text-align: center;">Overall</th>
+                  <th style="text-align: center;">(0,1] min</th>
+                  <th style="text-align: center;">(1,5] min</th>
+                  <th style="text-align: center;">(5,10] min</th>
+                  <th style="text-align: center;">(10,30] min</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+       <div class="mt-5 is-size-35 has-text-centered has-text-grey">        
+        <p class="is-size-80 has-text-grey has-text-centered" style="margin-top: 8px;">
+          <img src="./static/images/no_vision.png" alt="no vision" style="width:30px; height:30px; vertical-align:middle; margin-right:4px;">
+          <span style="margin-right:12px;">Only audio input without visual modality</span>
+          <img src="./static/images/no_audio.png" alt="no audio" style="width:30px; height:30px; vertical-align:middle; margin-right:4px;">
+          <span>Only visual input without audio modality</span>
+        </p>
+
+       </div>
+    </div>
+  </section>
+
+  <!-- 数据统计与示例 -->
+  <section id="statistics" class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="title is-2 mb-8">Benchmark Statistics</h2>
+          
+          <div class="columns is-multiline">
+           
+              <div class="card p-6">
+                <h3 class="title is-4 mb-4">Data Examples</h3>
+                <img src="./static/images/exsamples.png" alt="Video Category Distribution Chart from the paper">
+                <p class="mb-4">
+                  Examples in OmniVideoBench (“V” presents vision and “A” presents audio), and we present the atomic reasoning traces for these examples.
+                </p>
+              </div>
+
+              <div class="card p-6">
+                <h3 class="title is-4 mb-4">Generation Pipeline</h3>
+                <img src="./static/images/pipeline.png" alt="Video Category Distribution Chart from the paper">
+                <p class="mb-4">
+                  he complete pipeline of data collection, annotation, and refinement, where filtering and refinement serve as two key processes for quality assurance.
+                </p>
+              </div>
+  
+              <div class="card p-6">
+                <h3 class="title is-4 mb-4">Data Distribution</h3>
+                <img src="./static/images/main.png" alt="Video Category Distribution Chart from the paper">
+                <p class="mb-4">
+                  (a) OmniVideoBench covers 8 major categories and 68 subcategories. (b) OmniVideoBench comprises 13 task types.The above part shows the video duration distribution across different tasks, while the durations are categorized into four groups: "Short" for less than 1 minute, "Medium" for 1--5 minutes, "Long" for 5--10 minutes, and "Ultralong" for more than 10 minutes. The lower part illustrates the distribution of three types of audio (i.e., Speech, Sound and Music). (c) Distribution of video durations across four time intervals. (d) Distribution of three audio types.
+                </p>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 性能分析部分 -->
+  <section id="analysis" class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2 mb-8 has-text-centered">Performance Analysis</h2>
+      <div class="card p-6 mb-6">
+        <h3 class="title is-4 mb-5 has-text-centered">Model Performance Across 13 Task Categories</h3>
+        <img src="./static/images/acc4tasks.png" alt="Model Performance Across 13 Task Categories Chart" class="mb-4" style="border-radius: 8px;">
+        <p>A performance comparison of leading open-source and closed-source models across the 13 distinct reasoning tasks in OmniVideoBench. This highlights current strengths and weaknesses in areas like temporal reasoning, counting, and more.</p>
+      </div>
+      <div class="columns is-variable is-8">
+        <div class="column is-6">
+          <div class="card p-5">
+            <h3 class="title is-4 mb-4">Performance by Video Duration</h3>
+            <img src="./static/images/acc4duration.png" alt="Model Performance by Video Duration Chart" style="border-radius: 8px;">
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="card p-5">
+            <h3 class="title is-4 mb-4">Performance by Audio Type</h3>
+            <img src="./static/images/acc4audios.png" alt="Model Performance by Audio Type Chart" class="mb-4" style="border-radius: 8px;">
+            <p>Accuracy of the Gemini-2.0-Flash model on videos with different primary audio types, demonstrating performance variance on speech, sound, and music.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 引用部分 -->
+  <section id="citation" class="section" style="background-color: var(--light-gray-color);">
+    <div class="container is-max-desktop">
+        <h2 class="title is-2 mb-6 has-text-centered">Citation</h2>
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="card">
+                    <div class="card-content">
+                        <pre style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; border: 1px solid var(--border-color);">
+@misc{li2025omnivideobenchaudiovisualunderstandingevaluation,
+      title={OmniVideoBench: Towards Audio-Visual Understanding Evaluation for Omni MLLMs}, 
+      author={Caorui Li and Yu Chen and Yiyan Ji and Jin Xu and Zhenyu Cui and Shihao Li and Yuanxing Zhang and Jiafu Tang and Zhenghao Song and Dingling Zhang and Ying He and Haoxiang Liu and Yuxuan Wang and Qiufeng Wang and Zhenhe Wu and Jiehui Luo and Zhiyu Pan and Weihao Xie and Chenchen Zhang and Zhaohui Wang and Jiayi Tian and Yanghai Wang and Zhe Cao and Minxin Dai and Ke Wang and Runzhe Wen and Yinghao Ma and Yaning Pan and Sungkyun Chang and Termeh Taheri and Haiwen Xia and Christos Plachouras and Emmanouil Benetos and Yizhi Li and Ge Zhang and Jian Yang and Tianhao Peng and Zili Wang and Minghao Liu and Junran Peng and Zhaoxiang Zhang and Jiaheng Liu},
+      year={2025},
+      eprint={2510.10689},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2510.10689}, 
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer" style="background-color: var(--dark-color); color: white; padding: 4rem 1.5rem;">
+      <div class="container has-text-centered">
+
+          <p class="mb-5">Fostering the development of MLLMs with stronger and more generalizable reasoning capabilities.</p>
+          <div class="buttons is-centered">
+            <a href="https://github.com/OmniVideoBench/OmniVideoBench" class="button is-light is-outlined">
+              <i class="fab fa-github mr-2"></i> GitHub
+            </a>
+            <a href="https://arxiv.org/pdf/24xx.xxxxxx" class="button is-light is-outlined">
+              <i class="ai ai-arxiv mr-2"></i> arXiv Paper
+            </a>
+          </div>
+          <p class="mt-6 is-size-7" style="color: #9CA3AF;">© 2025 OmniVideoBench Team. All rights reserved.</p>
+      </div>
+  </footer>
+
+  <!-- 加载JSON和处理交互的JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 导航栏汉堡菜单
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+      if ($navbarBurgers.length > 0) {
+        $navbarBurgers.forEach(el => {
+          el.addEventListener('click', () => {
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      }
+      
+      // 加载排行榜数据
+      loadLeaderboardData();
+    });
+
+// --- 排行榜数据加载逻辑 ---
+const jsonFilePath = './static/data/leaderboard.json';
+const leaderboardBody = document.getElementById('leaderboard-body');
+
+async function loadLeaderboardData() {
+  try {
+    const response = await fetch(jsonFilePath);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    renderLeaderboard(data.models);
+  } catch (error) {
+    leaderboardBody.innerHTML = `<tr><td colspan="10" class="has-text-centered has-text-danger">Failed to load leaderboard data. Please try again later.</td></tr>`;
+    console.error('Error loading leaderboard:', error);
+  }
+}
+
+function renderLeaderboard(models) {
+  leaderboardBody.innerHTML = '';
+  models.forEach(model => {
+    const row = document.createElement('tr');
+
+    // 构造模型名称部分：名称 + 图标
+    const iconStyle = 'width:20px; height:20px; vertical-align:middle; margin-left:4px; margin-right:-2px';
+    let nameContent = `
+      <a href="${model.link}" target="_blank" class="has-text-primary has-text-weight-semibold">${model.name}</a>
+    `;
+    if (model.no_vision) {
+      nameContent += `<img src="./static/images/no_vision.png" alt="no vision" style="${iconStyle}">`;
+    }
+    if (model.no_audio) {
+      nameContent += `<img src="./static/images/no_audio.png" alt="no audio" style="${iconStyle}">`;
+    }
+
+    row.innerHTML = `
+      <td class="has-text-centered has-text-weight-medium">${model.rank}</td>
+      <td>
+        ${nameContent}
+        <p class="is-size-7 has-text-grey">
+          ${model.company} 
+          ${model.isNew ? '<span class="new-badge">New</span>' : ''}
+        </p>
+      </td>
+      <td class="has-text-centered">${model.params}</td>
+      <td class="has-text-centered">${model.frames}</td>
+      <td class="has-text-centered">${model.date}</td>
+      <td class="has-text-centered has-text-weight-bold has-text-primary-dark">${model.overall}</td>
+      <td class="has-text-centered">${model.short}</td>
+      <td class="has-text-centered">${model.medium}</td>
+      <td class="has-text-centered">${model.long}</td>
+      <td class="has-text-centered">${model.ultraLong}</td>
+    `;
+    leaderboardBody.appendChild(row);
+  });
+}
+
+
+  </script>
+</body>
+</html>
