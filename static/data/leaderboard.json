@@ -177,7 +177,7 @@
         "name": "VideoLLaMA2",
         "company": "DAMO-NLP-SG",
         "params": "7B",
-        "frames": 120,
+        "frames": 30,
         "date": "2024-06-12",
         "overall": 29.2,
         "short": 32.00,

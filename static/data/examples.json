@@ -1,0 +1,63 @@
+{
+    "interactiveExamples": [
+      {
+        "videoId": 1,
+        "videoUrl": "./static/videos/video_10.mp4",
+        "videoThumbnail": "./static/images/video_10.png",
+        "duration": "4:23",
+        "category": "cartoon",
+        "questions": [
+          {
+            "id": "1-1",
+            "questionType": "Causal Reasoning",
+            "audioType": "Sound",
+            "question": "When the man and woman in the picture were discussing ice cubes, why did they notice Superman behind them?",
+            "options": ["Because Superman slammed the door with a loud noise.", "Because Superman made a sound when he stepped on the wooden floor.", "Because Superman's robe fell off.", "Because Superman made too much noise while eating."],
+            "correctAnswer": 1,
+            "reasoning_steps": [
+              {
+                "modality": "vision",
+                "evidence": "they notice Superman at 0:37.",
+                "inference": "get the Superman."
+              },
+              {
+                "modality": "vision",
+                "evidence": "Superman just turned around and took a step.",
+                "inference": "get the point."
+              },
+              {
+                "modality": "audio",
+                "evidence": "Superman made a sound when he stepped on the wooden floor.",
+                "inference": "Because Superman made a sound when he stepped on the wooden floor."
+              }
+            ]
+          },
+          {
+            "id": "1-2",
+            "questionType": "Temporal Reasoning",
+            "audioType": "Speech",
+            "question": "Among the following events, in the actual chronological order, which one happened third?",
+            "options": ["he man noticed Superman's robe.", "The man felt trapped.", "Superman ate a sandwich.", "Superman snatched a kite."],
+            "correctAnswer": 2,
+            "reasoning_steps": [
+              {
+                "modality": "vision",
+                "evidence": "At 2:08, Superman snatched the child's kite earlier.",
+                "inference": "it happened firstly."
+              },
+              {
+                "modality": "audio",
+                "evidence": "At the 2:10 mark, the man says he feels stuck.",
+                "inference": "it happened secondly."
+              },
+              {
+                "modality": "vision",
+                "evidence": "the third event that Superman is eating a sandwich.",
+                "inference": "Superman is eating a sandwich."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+}
