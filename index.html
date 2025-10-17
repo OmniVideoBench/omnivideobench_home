@@ -160,6 +160,254 @@
       border-radius: 20px;
       margin-left: 0.5rem;
     }
+
+    .sample-card{
+      margin-bottom: 2rem;
+    }
+
+    .radio-option:hover {
+      background-color: #f8f9fa !important;
+      border-color: var(--primary-color) !important;
+    }
+
+    .radio-option input[type="radio"]:checked + span {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .video-container:hover .play-overlay {
+      background: rgba(59, 130, 246, 0.8) !important;
+    }
+
+    .reasoning-container .notification {
+      border-left: 4px solid var(--primary-color);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sample-card {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    #loadingMessage {
+      padding: 2rem;
+      color: var(--primary-color);
+    }
+
+    /* 视频播放器样式 */
+    .video-player-wrapper {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-player-wrapper video {
+      width: 100%;
+      height: auto;
+      min-height: 350px;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      cursor: pointer;
+      display: block;
+    }
+
+    .video-controls-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+      padding: 1.5rem 1rem 1rem 1rem;
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .video-player-wrapper:hover .video-controls-overlay,
+    .video-player-wrapper.playing .video-controls-overlay {
+      display: flex;
+    }
+
+    .play-pause-btn {
+      background: rgba(255,255,255,0.25);
+      border: none;
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .play-pause-btn:hover {
+      background: var(--primary-color);
+      transform: scale(1.1);
+    }
+
+    .fullscreen-btn {
+      background: rgba(255,255,255,0.25);
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-left: auto;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .fullscreen-btn:hover {
+      background: var(--primary-color);
+    }
+
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .play-overlay:hover {
+      background: rgba(59, 130, 246, 0.9);
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    .video-player-wrapper.playing .play-overlay {
+      display: none;
+    }
+
+    .duration-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      z-index: 5;
+    }
+
+    .video-player-wrapper.playing .duration-badge {
+      display: none;
+    }
+
+    /* 推理步骤样式 */
+    .reasoning-step {
+      background: #f9fafb;
+      padding: 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .reasoning-step:hover {
+      background: #f3f4f6;
+      transform: translateX(5px);
+    }
+
+    .reasoning-step p {
+      line-height: 1.6;
+    }
+
+    .reasoning-step strong {
+      color: var(--dark-color);
+    }
+
+    /* 多问题布局样式 */
+    .box {
+      transition: all 0.3s ease;
+    }
+
+    .box:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* 问题类型和音频类型标签样式 */
+    .box .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .box .tag {
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .box .tag i {
+      font-size: 0.75rem;
+    }
+
+    .video-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .video-modal-content {
+      position: relative;
+      margin: 5% auto;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .video-modal video {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .video-modal-close:hover {
+      color: var(--primary-color);
+    }
+
+    .video-modal-info {
+      background: white;
+      padding: 1rem;
+      border-radius: 0 0 8px 8px;
+      margin-top: -5px;
+    }
     
     @media (max-width: 768px) {
       .section {
@@ -198,7 +446,7 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <a href="https://github.com/NJU-LINK/OmniVideoBench" class="button is-secondary">
+            <a href="https://huggingface.co/datasets/NJU-LINK/OmniVideoBench" class="button is-secondary">
               <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
                 alt="Hugging Face" 
                 style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px;"></i> Data
@@ -338,6 +586,27 @@
                 <p class="mb-4">
                   Examples in OmniVideoBench (“V” presents vision and “A” presents audio), and we present the atomic reasoning traces for these examples.
                 </p>
+
+                <!-- Toggle Button -->
+                <div class="has-text-centered mb-4">
+                  <button id="toggleExamples" class="button is-primary">
+                    <i class="fas fa-play mr-2"></i> Experience more detailed examples
+                  </button>
+                </div>
+                
+                <!-- Interactive Examples Container -->
+                <div id="interactiveExamples" class="is-hidden">
+                  <div class="notification is-info is-light mb-5">
+                    <p><strong>Try:</strong> You might try the answer effects of multimodality, visual-only, and audio-only at the same time. </p>
+                  </div>
+                  
+                  <div id="loadingMessage" class="has-text-centered">
+                    <i class="fas fa-spinner fa-spin mr-2"></i>Loading examples...
+                  </div>
+                  
+                  <div class="columns is-multiline" id="examplesContainer"></div>
+                </div>
+
               </div>
 
               <div class="card p-6">
@@ -432,6 +701,9 @@
   </footer>
 
   <script>
+    // Global variable to store examples data
+    let examplesData = null;
+
     document.addEventListener('DOMContentLoaded', () => {
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
       if ($navbarBurgers.length > 0) {
@@ -447,69 +719,535 @@
       
       // load data
       loadLeaderboardData();
+      
+      // Setup interactive examples
+      setupInteractiveExamples();
     });
 
-/// --- load data for leaderboard ---
-const jsonFilePath = './static/data/leaderboard.json';
-const leaderboardBody = document.getElementById('leaderboard-body');
+    /// --- load data for leaderboard ---
+    const jsonFilePath = './static/data/leaderboard.json';
+    const leaderboardBody = document.getElementById('leaderboard-body');
 
-async function loadLeaderboardData() {
-  try {
-    const response = await fetch(jsonFilePath);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const data = await response.json();
-    renderLeaderboard(data.models);
-  } catch (error) {
-    leaderboardBody.innerHTML = `<tr><td colspan="10" class="has-text-centered has-text-danger">Failed to load leaderboard data. Please try again later.</td></tr>`;
-    console.error('Error loading leaderboard:', error);
-  }
-}
-
-function renderLeaderboard(models) {
-  leaderboardBody.innerHTML = '';
-
-  // rank according to overall score
-  models.sort((a, b) => parseFloat(b.overall) - parseFloat(a.overall));
-
-  // reorder 
-  models.forEach((model, index) => {
-    model.rank = index + 1;
-  });
-
-  models.forEach(model => {
-    const row = document.createElement('tr');
-
-    const iconStyle = 'width:20px; height:20px; vertical-align:middle; margin-left:4px; margin-right:-2px';
-    let nameContent = `
-      <a href="${model.link}" target="_blank" class="has-text-primary has-text-weight-semibold">${model.name}</a>
-    `;
-    if (model.no_vision) {
-      nameContent += `<img src="./static/images/no_vision.png" alt="no vision" style="${iconStyle}">`;
-    }
-    if (model.no_audio) {
-      nameContent += `<img src="./static/images/no_audio.png" alt="no audio" style="${iconStyle}">`;
+    async function loadLeaderboardData() {
+      try {
+        const response = await fetch(jsonFilePath);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        renderLeaderboard(data.models);
+      } catch (error) {
+        leaderboardBody.innerHTML = `<tr><td colspan="10" class="has-text-centered has-text-danger">Failed to load leaderboard data. Please try again later.</td></tr>`;
+        console.error('Error loading leaderboard:', error);
+      }
     }
 
-    row.innerHTML = `
-      <td class="has-text-centered has-text-weight-medium">${model.rank}</td>
-      <td>
-        ${nameContent}
-        <p class="is-size-7 has-text-grey">
-          ${model.company} 
-          ${model.isNew ? '<span class="new-badge">New</span>' : ''}
-        </p>
-      </td>
-      <td class="has-text-centered">${model.params}</td>
-      <td class="has-text-centered">${model.date}</td>
-      <td class="has-text-centered has-text-weight-bold has-text-primary-dark">${model.overall}</td>
-      <td class="has-text-centered">${model.short}</td>
-      <td class="has-text-centered">${model.medium}</td>
-      <td class="has-text-centered">${model.long}</td>
-      <td class="has-text-centered">${model.ultraLong}</td>
-    `;
-    leaderboardBody.appendChild(row);
-  });
-}
+    function renderLeaderboard(models) {
+      leaderboardBody.innerHTML = '';
+
+      // rank according to overall score
+      models.sort((a, b) => parseFloat(b.overall) - parseFloat(a.overall));
+
+      // reorder 
+      models.forEach((model, index) => {
+        model.rank = index + 1;
+      });
+
+      models.forEach(model => {
+        const row = document.createElement('tr');
+
+        const iconStyle = 'width:20px; height:20px; vertical-align:middle; margin-left:4px; margin-right:-2px';
+        let nameContent = `
+          <a href="${model.link}" target="_blank" class="has-text-primary has-text-weight-semibold">${model.name}</a>
+        `;
+        if (model.no_vision) {
+          nameContent += `<img src="./static/images/no_vision.png" alt="no vision" style="${iconStyle}">`;
+        }
+        if (model.no_audio) {
+          nameContent += `<img src="./static/images/no_audio.png" alt="no audio" style="${iconStyle}">`;
+        }
+
+        row.innerHTML = `
+          <td class="has-text-centered has-text-weight-medium">${model.rank}</td>
+          <td>
+            ${nameContent}
+            <p class="is-size-7 has-text-grey">
+              ${model.company} 
+              ${model.isNew ? '<span class="new-badge">New</span>' : ''}
+            </p>
+          </td>
+          <td class="has-text-centered">${model.params}</td>
+          <td class="has-text-centered">${model.date}</td>
+          <td class="has-text-centered has-text-weight-bold has-text-primary-dark">${model.overall}</td>
+          <td class="has-text-centered">${model.short}</td>
+          <td class="has-text-centered">${model.medium}</td>
+          <td class="has-text-centered">${model.long}</td>
+          <td class="has-text-centered">${model.ultraLong}</td>
+        `;
+        leaderboardBody.appendChild(row);
+      });
+    }
+
+    // Load examples data from JSON
+    async function loadExamplesData() {
+      try {
+        const response = await fetch('./static/data/examples.json');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        examplesData = data.interactiveExamples;
+        return examplesData;
+      } catch (error) {
+        console.error('Error loading examples data:', error);
+        showExamplesError();
+        return null;
+      }
+    }
+
+    // Setup interactive examples functionality
+    function setupInteractiveExamples() {
+      const toggleBtn = document.getElementById('toggleExamples');
+      const examplesContainer = document.getElementById('interactiveExamples');
+      const samplesContainer = document.getElementById('examplesContainer');
+      
+      if (!toggleBtn || !examplesContainer) {
+        console.log('Toggle button or container not found');
+        return;
+      }
+      
+      console.log('Setting up interactive examples...');
+      
+      toggleBtn.addEventListener('click', async () => {
+        console.log('Toggle button clicked');
+        examplesContainer.classList.toggle('is-hidden');
+        const isHidden = examplesContainer.classList.contains('is-hidden');
+        toggleBtn.innerHTML = isHidden ? 
+          '<i class="fas fa-play mr-2"></i> Try Interactive Examples' : 
+          '<i class="fas fa-times mr-2"></i> Hide Examples';
+        
+        if (!isHidden && samplesContainer.children.length === 0) {
+          if (!examplesData) {
+            console.log('Loading examples data...');
+            await loadExamplesData();
+          }
+          renderInteractiveExamples();
+        }
+      });
+    }
+
+    // Show error message
+    function showExamplesError() {
+      const loadingMessage = document.getElementById('loadingMessage');
+      if (loadingMessage) {
+        loadingMessage.innerHTML = `
+          <div class="notification is-danger is-light">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            Failed to load interactive examples. Please try again later.
+          </div>
+        `;
+      }
+    }
+
+    // Render interactive examples
+    function renderInteractiveExamples() {
+      const container = document.getElementById('examplesContainer');
+      const loadingMessage = document.getElementById('loadingMessage');
+      
+      if (!examplesData) {
+        showExamplesError();
+        return;
+      }
+      
+      if (loadingMessage) {
+        loadingMessage.style.display = 'none';
+      }
+      
+      container.innerHTML = '';
+      
+      examplesData.forEach((sample, index) => {
+        const sampleElement = createSampleElement(sample, index);
+        container.appendChild(sampleElement);
+      });
+      
+      // Create video modal
+      createVideoModal();
+    }
+
+    // Create sample element (supports multiple questions per video)
+    function createSampleElement(sample, sampleIndex) {
+      const column = document.createElement('div');
+      column.className = 'column is-12';
+      
+      const videoId = sample.videoId || sample.id;
+      
+      // Check if sample has multiple questions
+      if (sample.questions && Array.isArray(sample.questions)) {
+        // Multi-question format
+        column.innerHTML = `
+          <div class="card sample-card mb-5" data-sample-id="${videoId}">
+            <div class="card-content">
+              <!-- Video Section -->
+              <div class="columns is-centered mb-5">
+                <div class="column is-8">
+                  <h3 class="title is-4 mb-4 has-text-centered">Video ${sampleIndex + 1}</h3>
+                  <div class="video-player-wrapper" id="video-wrapper-${videoId}">
+                    <!-- Video element (initially hidden) -->
+                    <video id="video-${videoId}" class="video-player" 
+                           style="display: none;"
+                           preload="metadata"
+                           loop
+                           onclick="togglePlayPause(${videoId})">
+                      <source src="${sample.videoUrl}" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    
+                    <!-- Thumbnail (shown initially) -->
+                    <img id="thumbnail-${videoId}" 
+                         src="${sample.videoThumbnail}" 
+                         alt="Video thumbnail" 
+                         class="video-thumbnail"
+                         onerror="this.src='./static/images/exsamples.png'">
+                    
+                    <!-- Play overlay button -->
+                    <div class="play-overlay" id="play-overlay-${videoId}" onclick="playVideoInline(${videoId})">
+                      <i class="fas fa-play has-text-white" style="font-size: 2rem; margin-left: 4px;"></i>
+                    </div>
+                    
+                    <!-- Duration badge -->
+                    <div class="duration-badge" id="duration-badge-${videoId}">
+                      ${sample.duration}
+                    </div>
+                    
+                    <!-- Video controls -->
+                    <div class="video-controls-overlay" id="controls-${videoId}">
+                      <button class="play-pause-btn" onclick="togglePlayPause(${videoId})">
+                        <i class="fas fa-pause" id="play-icon-${videoId}"></i>
+                      </button>
+                      <button class="fullscreen-btn" onclick="openFullscreen(${videoId})">
+                        <i class="fas fa-expand mr-1"></i> Fullscreen
+                      </button>
+                    </div>
+                  </div>
+                  <p class="has-text-centered mt-3 is-size-7 has-text-grey">
+                    <span class="tag is-info is-light">${sample.category}</span>
+                    <span class="tag is-light">${sample.duration}</span>
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Questions Section -->
+              <div class="columns is-multiline">
+                ${sample.questions.map((question, qIndex) => `
+                  <div class="column is-6">
+                    <div class="box" style="background: #f9fafb; border: 1px solid #e5e7eb;">
+                      <div class="mb-3">
+                        <h4 class="title is-5 mb-2">Question ${qIndex + 1}</h4>
+                        <div class="tags">
+                          ${question.questionType ? `<span class="tag is-primary is-light"><i class="fas fa-question-circle mr-1"></i>${question.questionType}</span>` : ''}
+                          ${question.audioType ? `<span class="tag is-info is-light"><i class="fas fa-music mr-1"></i>${question.audioType}</span>` : ''}
+                        </div>
+                      </div>
+                      <p class="mb-4"><strong>${question.question}</strong></p>
+                      
+                      <div class="options-container mb-4" id="options-${question.id}">
+                        ${question.options.map((option, optionIndex) => `
+                          <label class="radio-option" style="display: block; margin-bottom: 0.5rem; cursor: pointer; 
+                                                            padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 8px; 
+                                                            transition: all 0.2s ease; background: white;">
+                            <input type="radio" name="question-${question.id}" value="${optionIndex}" 
+                                  onchange="handleAnswer('${question.id}', ${optionIndex})" style="margin-right: 0.5rem;">
+                            <span>${String.fromCharCode(65 + optionIndex)}. ${option}</span>
+                          </label>
+                        `).join('')}
+                      </div>
+                      
+                      <div class="result-container mb-3" id="result-${question.id}" style="display: none;"></div>
+                      
+                      <div class="buttons">
+                        <button class="button is-small is-info is-outlined" onclick="showReasoning('${question.id}')">
+                          <i class="fas fa-lightbulb mr-1"></i> Show Reasoning
+                        </button>
+                        <button class="button is-small is-link is-outlined" onclick="resetQuestion('${question.id}')">
+                          <i class="fas fa-redo mr-1"></i> Reset
+                        </button>
+                      </div>
+                      
+                      <div class="reasoning-container mt-4" id="reasoning-${question.id}" style="display: none;">
+                        <div class="notification is-light">
+                          <h5 class="title is-6 mb-3">
+                            <i class="fas fa-brain mr-2"></i>Step-by-Step Reasoning:
+                          </h5>
+                          ${question.reasoning_steps ? question.reasoning_steps.map((step, stepIndex) => `
+                            <div class="reasoning-step mb-3" style="padding-left: 1rem; border-left: 3px solid ${step.modality === 'vision' ? '#3B82F6' : '#10B981'};">
+                              <div class="mb-2">
+                                <span class="tag ${step.modality === 'vision' ? 'is-info' : 'is-success'} is-light">
+                                  <i class="fas ${step.modality === 'vision' ? 'fa-eye' : 'fa-volume-up'} mr-1"></i>
+                                  Step ${stepIndex + 1}: ${step.modality === 'vision' ? 'Vision' : 'Audio'}
+                                </span>
+                              </div>
+                              <p class="mb-2"><strong>Evidence:</strong> ${step.evidence}</p>
+                              <p><strong>Inference:</strong> ${step.inference}</p>
+                            </div>
+                          `).join('') : '<p>No reasoning provided.</p>'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      return column;
+    }
+
+    // Create video modal
+    function createVideoModal() {
+      // Check if modal already exists
+      if (document.getElementById('videoModal')) return;
+      
+      const modal = document.createElement('div');
+      modal.id = 'videoModal';
+      modal.className = 'video-modal';
+      modal.innerHTML = `
+        <div class="video-modal-content">
+          <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
+          <video id="modalVideo" controls autoplay>
+            <source id="modalVideoSource" src="" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-modal-info">
+            <h4 class="title is-5 mb-2" id="modalVideoTitle"></h4>
+            <p class="is-size-6" id="modalVideoCategory"></p>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // Close modal when clicking outside video
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeVideoModal();
+        }
+      });
+      
+      // Close modal with ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeVideoModal();
+        }
+      });
+    }
+
+    // Play video inline (not in modal)
+    function playVideoInline(sampleId) {
+      const video = document.getElementById(`video-${sampleId}`);
+      const thumbnail = document.getElementById(`thumbnail-${sampleId}`);
+      const wrapper = document.getElementById(`video-wrapper-${sampleId}`);
+      
+      if (!video || !thumbnail || !wrapper) return;
+      
+      // Hide thumbnail and show video
+      thumbnail.style.display = 'none';
+      video.style.display = 'block';
+      wrapper.classList.add('playing');
+      
+      // Play video
+      video.play().catch(err => {
+        console.error('Video play error:', err);
+        alert('Error loading video. Please make sure the video file exists.');
+        // Restore thumbnail on error
+        thumbnail.style.display = 'block';
+        video.style.display = 'none';
+        wrapper.classList.remove('playing');
+      });
+      
+      // Update play/pause icon when video plays
+      video.addEventListener('play', () => {
+        const icon = document.getElementById(`play-icon-${sampleId}`);
+        if (icon) icon.className = 'fas fa-pause';
+      });
+      
+      // Update play/pause icon when video pauses
+      video.addEventListener('pause', () => {
+        const icon = document.getElementById(`play-icon-${sampleId}`);
+        if (icon) icon.className = 'fas fa-play';
+      });
+      
+      // Note: Video is set to loop, so 'ended' event won't fire
+      // If you want to disable loop, uncomment the code below:
+      /*
+      video.addEventListener('ended', () => {
+        thumbnail.style.display = 'block';
+        video.style.display = 'none';
+        wrapper.classList.remove('playing');
+        video.currentTime = 0;
+        const icon = document.getElementById(`play-icon-${sampleId}`);
+        if (icon) icon.className = 'fas fa-pause';
+      });
+      */
+    }
+
+    // Toggle play/pause
+    function togglePlayPause(sampleId) {
+      const video = document.getElementById(`video-${sampleId}`);
+      const icon = document.getElementById(`play-icon-${sampleId}`);
+      
+      if (!video) return;
+      
+      if (video.paused) {
+        video.play();
+        if (icon) icon.className = 'fas fa-pause';
+      } else {
+        video.pause();
+        if (icon) icon.className = 'fas fa-play';
+      }
+    }
+
+    // Open fullscreen
+    function openFullscreen(sampleId) {
+      const video = document.getElementById(`video-${sampleId}`);
+      const thumbnail = document.getElementById(`thumbnail-${sampleId}`);
+      const wrapper = document.getElementById(`video-wrapper-${sampleId}`);
+      
+      if (!video) {
+        console.error('Video element not found');
+        return;
+      }
+      
+      // If video is not playing yet, start playing it first
+      if (thumbnail && thumbnail.style.display !== 'none') {
+        playVideoInline(sampleId);
+        // Wait a bit for video to start before going fullscreen
+        setTimeout(() => {
+          requestFullscreenForVideo(video);
+        }, 100);
+      } else {
+        requestFullscreenForVideo(video);
+      }
+    }
+    
+    // Helper function to request fullscreen
+    function requestFullscreenForVideo(video) {
+      if (video.requestFullscreen) {
+        video.requestFullscreen().catch(err => {
+          console.error('Fullscreen error:', err);
+        });
+      } else if (video.webkitRequestFullscreen) { // Safari
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { // IE11
+        video.msRequestFullscreen();
+      } else if (video.mozRequestFullScreen) { // Firefox
+        video.mozRequestFullScreen();
+      } else {
+        alert('Fullscreen is not supported by your browser.');
+      }
+    }
+
+    // Keep old function name for backward compatibility
+    function playVideo(sampleId) {
+      playVideoInline(sampleId);
+    }
+
+    // Close video modal (keep for compatibility, but not used anymore)
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      
+      if (modal && video) {
+        video.pause();
+        video.currentTime = 0;
+        modal.style.display = 'none';
+      }
+    }
+
+    // Handle answer selection
+    function handleAnswer(questionId, selectedAnswer) {
+      // Find the question in the new data structure
+      let question = null;
+      for (const sample of examplesData) {
+        if (sample.questions && Array.isArray(sample.questions)) {
+          question = sample.questions.find(q => q.id === questionId);
+          if (question) break;
+        }
+      }
+      
+      if (!question) {
+        console.error('Question not found:', questionId);
+        return;
+      }
+      
+      const resultContainer = document.getElementById(`result-${questionId}`);
+      const optionsContainer = document.getElementById(`options-${questionId}`);
+      
+      const radioButtons = optionsContainer.querySelectorAll('input[type="radio"]');
+      radioButtons.forEach(radio => radio.disabled = true);
+      
+      resultContainer.style.display = 'block';
+      
+      if (selectedAnswer === question.correctAnswer) {
+        resultContainer.innerHTML = `
+          <div class="notification is-success is-light">
+            <i class="fas fa-check-circle mr-2"></i>
+            <strong>Correct!</strong> Great job on your audio-visual reasoning skills.
+          </div>
+        `;
+        const correctOption = optionsContainer.children[question.correctAnswer];
+        correctOption.style.backgroundColor = '#d4edda';
+        correctOption.style.borderColor = '#28a745';
+      } else {
+        resultContainer.innerHTML = `
+          <div class="notification is-danger is-light">
+            <i class="fas fa-times-circle mr-2"></i>
+            <strong>Incorrect.</strong> The correct answer is: 
+            <strong>${String.fromCharCode(65 + question.correctAnswer)}. ${question.options[question.correctAnswer]}</strong>
+          </div>
+        `;
+        const correctOption = optionsContainer.children[question.correctAnswer];
+        const wrongOption = optionsContainer.children[selectedAnswer];
+        
+        correctOption.style.backgroundColor = '#d4edda';
+        correctOption.style.borderColor = '#28a745';
+        wrongOption.style.backgroundColor = '#f8d7da';
+        wrongOption.style.borderColor = '#dc3545';
+      }
+    }
+
+    // Show/hide reasoning
+    function showReasoning(sampleId) {
+      const reasoningContainer = document.getElementById(`reasoning-${sampleId}`);
+      const isHidden = reasoningContainer.style.display === 'none';
+      reasoningContainer.style.display = isHidden ? 'block' : 'none';
+      
+      const button = event.target.closest('button');
+      if (button) {
+        button.innerHTML = isHidden ? 
+          '<i class="fas fa-lightbulb mr-1"></i> Hide Reasoning' : 
+          '<i class="fas fa-lightbulb mr-1"></i> Show Reasoning';
+      }
+    }
+
+    // Reset question
+    function resetQuestion(sampleId) {
+      const optionsContainer = document.getElementById(`options-${sampleId}`);
+      const resultContainer = document.getElementById(`result-${sampleId}`);
+      const reasoningContainer = document.getElementById(`reasoning-${sampleId}`);
+      
+      const radioButtons = optionsContainer.querySelectorAll('input[type="radio"]');
+      radioButtons.forEach(radio => {
+        radio.disabled = false;
+        radio.checked = false;
+      });
+      
+      const labels = optionsContainer.querySelectorAll('.radio-option');
+      labels.forEach(label => {
+        label.style.backgroundColor = '';
+        label.style.borderColor = '#e5e7eb';
+      });
+      
+      resultContainer.style.display = 'none';
+      reasoningContainer.style.display = 'none';
+    }
 
 
   </script>
