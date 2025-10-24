@@ -362,6 +362,28 @@
       font-size: 0.75rem;
     }
 
+    /* 提交结果按钮样式 */
+    .button.is-success.is-large {
+      box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .button.is-success.is-large:hover {
+      box-shadow: 0 6px 25px rgba(72, 187, 120, 0.4);
+      transform: translateY(-3px);
+    }
+
+    /* 模态框样式增强 */
+    .modal-card {
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-card-body {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
     .video-modal {
       display: none;
       position: fixed;
@@ -566,10 +588,179 @@
           <img src="./static/images/no_audio.png" alt="no audio" style="width:30px; height:30px; vertical-align:middle; margin-right:4px;">
           <span>Only visual input without audio modality</span>
         </p>
+       </div>
 
+       <!-- Submit Results Button -->
+       <div class="has-text-centered mt-6">
+        <button class="button is-success is-large" onclick="openSubmitModal()" style="font-weight: 600;">
+          <i class="fas fa-paper-plane mr-2"></i> Submit Your Results
+        </button>
+        <p class="mt-3 has-text-grey is-size-7">
+          Want to add your model to the leaderboard? Click here to submit your results!
+        </p>
        </div>
     </div>
   </section>
+
+  <!-- Submit Results Modal -->
+  <div id="submitModal" class="modal">
+    <div class="modal-background" onclick="closeSubmitModal()"></div>
+    <div class="modal-card" style="max-width: 600px;">
+      <header class="modal-card-head">
+        <p class="modal-card-title"><i class="fas fa-paper-plane mr-2"></i>Submit Your Results</p>
+        <button class="delete" aria-label="close" onclick="closeSubmitModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="notification is-info is-light">
+          <p><strong>Note:</strong> After submission, your results will be reviewed by our team before being added to the leaderboard.</p>
+        </div>
+
+        <form id="submitForm">
+          <!-- Basic Information -->
+          <div class="field">
+            <label class="label">Your Name <span class="has-text-danger">*</span></label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" name="userName" placeholder="e.g., John Doe" required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Organization <span class="has-text-danger">*</span></label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" name="organization" placeholder="e.g., University / Company" required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-building"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Paper Link or Homepage <span class="has-text-grey">(at least one required)</span></label>
+            <div class="control has-icons-left mb-2">
+              <input class="input" type="url" name="paperLink" placeholder="https://arxiv.org/abs/...">
+              <span class="icon is-small is-left">
+                <i class="fas fa-file-alt"></i>
+              </span>
+            </div>
+            <div class="control has-icons-left">
+              <input class="input" type="url" name="homepageLink" placeholder="https://your-project-page.com">
+              <span class="icon is-small is-left">
+                <i class="fas fa-home"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Model Information -->
+          <hr>
+          <h5 class="title is-5 mb-4">Model Information</h5>
+
+          <div class="field">
+            <label class="label">Model Name <span class="has-text-danger">*</span></label>
+            <div class="control">
+              <input class="input" type="text" name="modelName" placeholder="e.g., GPT-4V" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Company/Lab <span class="has-text-danger">*</span></label>
+            <div class="control">
+              <input class="input" type="text" name="company" placeholder="e.g., OpenAI" required>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                <label class="label">Parameters <span class="has-text-danger">*</span></label>
+                <div class="control">
+                  <input class="input" type="text" name="params" placeholder="e.g., 7B" required>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="field">
+                <label class="label">Date (YYYY-MM-DD) <span class="has-text-danger">*</span></label>
+                <div class="control">
+                  <input class="input" type="date" name="date" required>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Performance Scores -->
+          <hr>
+          <h5 class="title is-5 mb-4">Performance Scores (%)</h5>
+
+          <div class="columns is-multiline">
+            <div class="column is-half">
+              <div class="field">
+                <label class="label">Overall <span class="has-text-danger">*</span></label>
+                <div class="control">
+                  <input class="input" type="number" name="overall" step="0.01" min="0" max="100" placeholder="e.g., 58.9" required>
+                </div>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="field">
+                <label class="label">(0,1] min <span class="has-text-danger">*</span></label>
+                <div class="control">
+                  <input class="input" type="number" name="short" step="0.01" min="0" max="100" placeholder="e.g., 57.83" required>
+                </div>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="field">
+                <label class="label">(1,5] min <span class="has-text-danger">*</span></label>
+                <div class="control">
+                  <input class="input" type="number" name="medium" step="0.01" min="0" max="100" placeholder="e.g., 64.43" required>
+                </div>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="field">
+                <label class="label">(5,10] min <span class="has-text-danger">*</span></label>
+                <div class="control">
+                  <input class="input" type="number" name="long" step="0.01" min="0" max="100" placeholder="e.g., 55.02" required>
+                </div>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="field">
+                <label class="label">(10,30] min <span class="has-text-danger">*</span></label>
+                <div class="control">
+                  <input class="input" type="number" name="ultraLong" step="0.01" min="0" max="100" placeholder="e.g., 55.94" required>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Options -->
+          <div class="field">
+            <label class="checkbox">
+              <input type="checkbox" name="noVision">
+              Only audio input (without visual modality)
+            </label>
+          </div>
+          <div class="field">
+            <label class="checkbox">
+              <input type="checkbox" name="noAudio">
+              Only visual input (without audio modality)
+            </label>
+          </div>
+
+        </form>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" onclick="submitResults()">
+          <i class="fas fa-paper-plane mr-2"></i> Submit
+        </button>
+        <button class="button" onclick="closeSubmitModal()">Cancel</button>
+      </footer>
+    </div>
+  </div>
 
   <!-- data statistic  -->
   <section id="statistics" class="section">
@@ -1249,6 +1440,107 @@
       reasoningContainer.style.display = 'none';
     }
 
+    // Submit Results Modal Functions
+    function openSubmitModal() {
+      const modal = document.getElementById('submitModal');
+      modal.classList.add('is-active');
+    }
+
+    function closeSubmitModal() {
+      const modal = document.getElementById('submitModal');
+      modal.classList.remove('is-active');
+      // Reset form
+      document.getElementById('submitForm').reset();
+    }
+
+    function submitResults() {
+      const form = document.getElementById('submitForm');
+      
+      // Validate form
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Check if at least one link is provided
+      const paperLink = form.paperLink.value.trim();
+      const homepageLink = form.homepageLink.value.trim();
+      if (!paperLink && !homepageLink) {
+        alert('Please provide at least one link (Paper Link or Homepage Link)');
+        return;
+      }
+
+      // Collect form data
+      const formData = new FormData(form);
+      const data = {};
+      for (let [key, value] of formData.entries()) {
+        if (key === 'noVision' || key === 'noAudio') {
+          data[key] = form[key].checked;
+        } else {
+          data[key] = value;
+        }
+      }
+
+      // Prepare email content
+      const emailSubject = 'OmniVideoBench Leaderboard Submission - ' + data.modelName;
+      const emailBody = `
+Hi OmniVideoBench Team,
+
+I would like to submit results for the leaderboard.
+
+=== Submitter Information ===
+Name: ${data.userName}
+Organization: ${data.organization}
+Paper Link: ${data.paperLink || 'N/A'}
+Homepage Link: ${data.homepageLink || 'N/A'}
+
+=== Model Information ===
+Model Name: ${data.modelName}
+Company/Lab: ${data.company}
+Parameters: ${data.params}
+Date: ${data.date}
+
+=== Performance Scores (%) ===
+Overall: ${data.overall}
+(0,1] min: ${data.short}
+(1,5] min: ${data.medium}
+(5,10] min: ${data.long}
+(10,30] min: ${data.ultraLong}
+
+=== Additional Information ===
+Only Audio Input (no vision): ${data.noVision ? 'Yes' : 'No'}
+Only Visual Input (no audio): ${data.noAudio ? 'Yes' : 'No'}
+
+=== JSON Format for leaderboard.json ===
+{
+  "name": "${data.modelName}",
+  "company": "${data.company}",
+  "params": "${data.params}",
+  "date": "${data.date}",
+  "overall": ${data.overall},
+  "short": ${data.short},
+  "medium": ${data.medium},
+  "long": ${data.long},
+  "ultraLong": ${data.ultraLong},
+  "link": "${data.paperLink || data.homepageLink}"${data.noVision ? ',\n  "no_vision": true' : ''}${data.noAudio ? ',\n  "no_audio": true' : ''}
+}
+
+Best regards,
+${data.userName}
+      `.trim();
+
+      // Create mailto link
+      const mailtoLink = `mailto:caoruili507@gmail.com?cc=yu.chen.8525@gmail.com,jiyiiiyyy@gmail.com,liujiaheng@nju.edu.cn&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+      // Open email client
+      window.location.href = mailtoLink;
+
+      // Show success message
+      setTimeout(() => {
+        alert('Thank you! Your email client should open now. Please send the email to complete your submission.\\n\\nYour results will be reviewed and added to the leaderboard soon.');
+        closeSubmitModal();
+      }, 500);
+    }
 
   </script>
 </body>
