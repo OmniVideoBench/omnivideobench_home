@@ -216,6 +216,36 @@
         "ultraLong": 25.95,
         "link": "https://github.com/QwenLM/Qwen2.5-Omni",
         "no_audio":true
+      },
+      {
+        "rank": 16,
+        "name": "OmniVinci",
+        "company": "NVIDIA",
+        "params": "9B",
+        "frames": 256,
+        "date": "2025-10-19",
+        "overall": 32.10,
+        "short": 38.55,
+        "medium": 34.11,
+        "long": 30.13,
+        "ultraLong": 27.10,
+        "link": "https://github.com/NVlabs/OmniVinci",
+        "no_audio":false
+      },
+      {
+        "rank": 17,
+        "name": "VITA-1.5",
+        "company": "NJU",
+        "params": "8B",
+        "frames": 16,
+        "date": "2024-12-20",
+        "overall": 30.50,
+        "short": 31.33,
+        "medium": 27.41,
+        "long": 30.57,
+        "ultraLong": 33.97,
+        "link": "https://github.com/VITA-MLLM/VITA",
+        "no_audio":false
       }
     ]
   }
