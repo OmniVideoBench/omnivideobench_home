@@ -1,4 +1,4 @@
-{
+window.LEADERBOARD_DATA = {
   "models": [
     {
       "rank": 1,
@@ -276,4 +276,4 @@
       "no_audio": true
     }
   ]
-}
+};

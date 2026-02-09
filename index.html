@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.9">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OmniVideoBench: Towards Audio-Visual Understanding Evaluation</title>
   
   <link rel="icon" href="./static/images/logo.png">
@@ -897,7 +897,15 @@
       </div>
   </footer>
 
+  <script src="./static/data/leaderboard.js"></script>
   <script>
+    function getEmbeddedLeaderboardData() {
+      if (window.LEADERBOARD_DATA && Array.isArray(window.LEADERBOARD_DATA.models)) {
+        return window.LEADERBOARD_DATA.models;
+      }
+      return null;
+    }
+
     // Global variable to store examples data
     let examplesData = null;
 
@@ -932,9 +940,20 @@
         const data = await response.json();
         renderLeaderboard(data.models);
       } catch (error) {
-        leaderboardBody.innerHTML = `<tr><td colspan="10" class="has-text-centered has-text-danger">Failed to load leaderboard data. Please try again later.</td></tr>`;
+        const embedded = getEmbeddedLeaderboardData();
+        if (embedded) {
+          renderLeaderboard(embedded);
+          return;
+        }
+        leaderboardBody.innerHTML = `<tr><td colspan="10" class="has-text-centered has-text-danger">Failed to load leaderboard data. If you opened this page via file://, please use a local server.</td></tr>`;
         console.error('Error loading leaderboard:', error);
       }
+    }
+
+    function formatScore(value) {
+      if (value === null || value === undefined || value === '') return '-';
+      const num = Number(value);
+      return Number.isFinite(num) ? num.toFixed(2) : value;
     }
 
     function renderLeaderboard(models) {
@@ -973,11 +992,11 @@
           </td>
           <td class="has-text-centered">${model.params}</td>
           <td class="has-text-centered">${model.date}</td>
-          <td class="has-text-centered has-text-weight-bold has-text-primary-dark">${model.overall}</td>
-          <td class="has-text-centered">${model.short}</td>
-          <td class="has-text-centered">${model.medium}</td>
-          <td class="has-text-centered">${model.long}</td>
-          <td class="has-text-centered">${model.ultraLong}</td>
+          <td class="has-text-centered has-text-weight-bold has-text-primary-dark">${formatScore(model.overall)}</td>
+          <td class="has-text-centered">${formatScore(model.short)}</td>
+          <td class="has-text-centered">${formatScore(model.medium)}</td>
+          <td class="has-text-centered">${formatScore(model.long)}</td>
+          <td class="has-text-centered">${formatScore(model.ultraLong)}</td>
         `;
         leaderboardBody.appendChild(row);
       });
